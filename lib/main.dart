@@ -30,9 +30,18 @@ class _MyAppState extends State<MyApp> {
             'Fernando Augusto',
             style: TextStyle(
                 fontFamily: 'Pacifico',
+                fontSize: 40.0,
                 color: Colors.white,
                 fontWeight: FontWeight.bold),
           ),
+          Text('FLUTTER DEVELOPER',
+              style: TextStyle(
+                fontFamily: 'Source Sans Pro',
+                color: Colors.teal.shade100,
+                fontSize: 20.0,
+                letterSpacing: 2.5,
+                fontWeight: FontWeight.bold,
+              ))
         ],
       )),
     );
