@@ -16,30 +16,28 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.blue,
       appBar: AppBar(
-        title: Text('Dicee'),
-        backgroundColor: Colors.red,
+        title: Text('Ask Me Anything'),
+        backgroundColor: Colors.blue.shade900,
       ),
-      body: DicePage(),
+      body: AskPage(),
     );
   }
 }
 
-class DicePage extends StatefulWidget {
-  const DicePage({Key? key}) : super(key: key);
+class AskPage extends StatefulWidget {
+  const AskPage({Key? key}) : super(key: key);
 
   @override
-  State<DicePage> createState() => _DicePageState();
+  State<AskPage> createState() => _AskPageState();
 }
 
-class _DicePageState extends State<DicePage> {
-  int leftDiceNumber = 1;
-  int rightDiceNumber = 2;
+class _AskPageState extends State<AskPage> {
+  int ballNumber = 1;
   void Sortear() {
     setState(() {
-      leftDiceNumber = Random().nextInt(6) + 1;
-      rightDiceNumber = Random().nextInt(6) + 1;
+      ballNumber = Random().nextInt(5) + 1;
     });
   }
 
@@ -53,14 +51,7 @@ class _DicePageState extends State<DicePage> {
                 onPressed: () {
                   Sortear();
                 },
-                child: Image.asset('assets/images/dice$leftDiceNumber.png')),
-          ),
-          Expanded(
-            child: TextButton(
-                onPressed: () {
-                  Sortear();
-                },
-                child: Image.asset('assets/images/dice$rightDiceNumber.png')),
+                child: Image.asset('assets/images/ball$ballNumber.png')),
           ),
         ],
       ),
