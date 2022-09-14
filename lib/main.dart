@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
-  runApp(
-    MaterialApp(home: MyApp()),
-  );
+  return runApp(MaterialApp(home: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -17,74 +16,54 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal,
-      body: SafeArea(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      backgroundColor: Colors.red,
+      appBar: AppBar(
+        title: Text('Dicee'),
+        backgroundColor: Colors.red,
+      ),
+      body: DicePage(),
+    );
+  }
+}
+
+class DicePage extends StatefulWidget {
+  const DicePage({Key? key}) : super(key: key);
+
+  @override
+  State<DicePage> createState() => _DicePageState();
+}
+
+class _DicePageState extends State<DicePage> {
+  int leftDiceNumber = 1;
+  int rightDiceNumber = 2;
+  void Sortear() {
+    setState(() {
+      leftDiceNumber = Random().nextInt(6) + 1;
+      rightDiceNumber = Random().nextInt(6) + 1;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
         children: [
-          CircleAvatar(
-            radius: 50.0,
-            backgroundImage: AssetImage('assets/images/foto_perfil.jpeg'),
+          Expanded(
+            child: TextButton(
+                onPressed: () {
+                  Sortear();
+                },
+                child: Image.asset('assets/images/dice$leftDiceNumber.png')),
           ),
-          Text(
-            'Fernando Augusto',
-            style: TextStyle(
-                fontFamily: 'Pacifico',
-                fontSize: 40.0,
-                color: Colors.white,
-                fontWeight: FontWeight.bold),
+          Expanded(
+            child: TextButton(
+                onPressed: () {
+                  Sortear();
+                },
+                child: Image.asset('assets/images/dice$rightDiceNumber.png')),
           ),
-          Text(
-            'FLUTTER DEVELOPER',
-            style: TextStyle(
-              fontFamily: 'Source Sans Pro',
-              color: Colors.teal.shade100,
-              fontSize: 20.0,
-              letterSpacing: 2.5,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(
-            height: 20.0,
-            width: 150.0,
-            child: Divider(
-              color: Colors.teal.shade900,
-            ),
-          ),
-          Card(
-            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-            child: ListTile(
-              leading: Icon(
-                Icons.phone,
-                color: Colors.teal,
-              ),
-              title: Text(
-                '+55 11 97255-7700',
-                style: TextStyle(
-                    fontFamily: 'Source Sans Pro',
-                    fontSize: 20.0,
-                    color: Colors.teal.shade900),
-              ),
-            ),
-          ),
-          Card(
-            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-            child: ListTile(
-              leading: Icon(
-                Icons.email,
-                color: Colors.teal,
-              ),
-              title: Text(
-                'fefe9779@gmail.com',
-                style: TextStyle(
-                    fontFamily: 'Source Sans Pro',
-                    fontSize: 20.0,
-                    color: Colors.teal.shade900),
-              ),
-            ),
-          )
         ],
-      )),
+      ),
     );
   }
 }
