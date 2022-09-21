@@ -18,10 +18,19 @@ class _MyAppState extends State<MyApp> {
     player.play(AssetSource('sounds/note$noteNumber.wav'));
   }
 
-  Expanded buildKey(int soundNumber, var colors) {
+  final list = [
+    Colors.red,
+    Colors.orange,
+    Colors.yellow,
+    Colors.green,
+    Colors.teal,
+    Colors.blue,
+    Colors.purple
+  ];
+  Expanded buildKey(int soundNumber) {
     return Expanded(
       child: TextButton(
-        style: TextButton.styleFrom(backgroundColor: colors),
+        style: TextButton.styleFrom(backgroundColor: list[soundNumber - 1]),
         onPressed: () {
           playMusic(soundNumber);
         },
@@ -33,16 +42,16 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: Text('Xylophone App'),
+          backgroundColor: Colors.black,
+        ),
         backgroundColor: Colors.black,
-        body: SafeArea(
-            child: Column(children: [
-          buildKey(1, Colors.red),
-          buildKey(2, Colors.orange),
-          buildKey(3, Colors.yellow),
-          buildKey(4, Colors.green),
-          buildKey(5, Colors.teal),
-          buildKey(6, Colors.blue),
-          buildKey(7, Colors.purple),
-        ])));
+        body: ListView.builder(
+          itemCount: list.length,
+          itemBuilder: (context, index) {
+            return buildKey(index + 1);
+          },
+        ));
   }
 }
