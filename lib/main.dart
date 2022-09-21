@@ -25,18 +25,21 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    int i;
     return Scaffold(
         appBar: AppBar(
           title: Text('Xylophone App'),
           backgroundColor: Colors.black,
         ),
         backgroundColor: Colors.black,
-        body: ListView.builder(
-          itemCount: list.length,
-          itemBuilder: (context, index) {
-            final keyindex = index;
-            return ColorKey(list: list, keyindex: keyindex);
-          },
+        body: Column(
+          children: [
+            for (i = 1; i < 8; i++)
+              ColorKey(
+                list: list,
+                keyindex: i,
+              ),
+          ],
         ));
   }
 }
@@ -55,9 +58,9 @@ class ColorKey extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: TextButton(
-        style: TextButton.styleFrom(backgroundColor: list[keyindex]),
+        style: TextButton.styleFrom(backgroundColor: list[keyindex - 1]),
         onPressed: () {
-          playMusic(keyindex + 1);
+          playMusic(keyindex);
         },
         child: Container(),
       ),
