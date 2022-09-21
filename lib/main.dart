@@ -13,11 +13,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  void playMusic(int noteNumber) {
-    final player = AudioPlayer();
-    player.play(AssetSource('sounds/note$noteNumber.wav'));
-  }
-
   final list = [
     Colors.red,
     Colors.orange,
@@ -27,17 +22,6 @@ class _MyAppState extends State<MyApp> {
     Colors.blue,
     Colors.purple
   ];
-  Expanded buildKey(int soundNumber) {
-    return Expanded(
-      child: TextButton(
-        style: TextButton.styleFrom(backgroundColor: list[soundNumber - 1]),
-        onPressed: () {
-          playMusic(soundNumber);
-        },
-        child: Container(),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +34,38 @@ class _MyAppState extends State<MyApp> {
         body: ListView.builder(
           itemCount: list.length,
           itemBuilder: (context, index) {
-            return buildKey(index + 1);
+            final keyindex = index;
+            return ColorKey(list: list, keyindex: keyindex);
           },
         ));
   }
+}
+
+class ColorKey extends StatelessWidget {
+  const ColorKey({
+    Key? key,
+    required this.list,
+    required this.keyindex,
+  }) : super(key: key);
+
+  final List<MaterialColor> list;
+  final int keyindex;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: TextButton(
+        style: TextButton.styleFrom(backgroundColor: list[keyindex]),
+        onPressed: () {
+          playMusic(keyindex + 1);
+        },
+        child: Container(),
+      ),
+    );
+  }
+}
+
+void playMusic(int noteNumber) {
+  final player = AudioPlayer();
+  player.play(AssetSource('sounds/note$noteNumber.wav'));
 }
