@@ -1,23 +1,14 @@
 import 'package:flutter/material.dart';
-import 'input_page.dart';
+import 'package:novo_curso/screens/loading_screen.dart';
 
-void main() {
-  return runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: Color(0xFF0A0E21),
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: Color(0xFF0A0E21),
-        ),
-      ),
-      home: InputPage(),
+      theme: ThemeData.dark(),
+      home: LoadingScreen(),
     );
   }
 }
